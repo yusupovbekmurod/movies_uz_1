@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="./style.css">
+    <title>AllMovies</title>
+  </head>
+  <body>
+<header class="bg-success">
+   <div class="container">
+      <div class="nav text-white p-3">
+         <h1>AllMovies.UZ</h1>
+      </div>
+   </div>
+</header>
+
+<main>
+   <div class="container-fluid ">
+      <div class="row ">
+         <div class="col-md-3  p-3 bg-light">
+          <form action="#">
+            <label for="filmName" class="my-3 w-100 fs-5">
+              Enter film name 
+              <input type="text" placeholder="Enter film name" class="form-control   p-2 " id="filmName">
+            </label>
+            <label for="filmRating" class="my-3 w-100 fs-5">
+              Enter film rating
+              <input type="number" placeholder="Enter film rating" class="form-control   p-2 " id="filmRating">
+            </label>
+            
+            <select id="category" class="form-select w-100">
+              <option value="all" selected disabled>category</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary w-100 my-3">Submit</button>
+          </form>
+         </div>
+         <div class="col-md-7 p-3 bg-light">
+            <div class="wrapper">
+
+               
+               
+            </div>
+         </div>
+         <div class="col p-3 bg-dark">1</div>
+     </div>
+   </div>
+</main>
+
+
+<footer class="bg-success text-white text-center">
+  <h4> My-Site 2022 &#169</h1>
+</footer>
+
+
+<script src="./plugin.js"></script>
+    <script src="./dbs.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
