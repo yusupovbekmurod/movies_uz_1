@@ -23,7 +23,7 @@
    <div class="container-fluid ">
       <div class="row ">
          <div class="col-md-3  p-3 bg-light">
-          <form action="#">
+          <form action="#" id="submitForm">
             <label for="filmName" class="my-3 w-100 fs-5">
               Enter film name 
               <input type="text" placeholder="Enter film name" class="form-control   p-2 " id="filmName">
@@ -37,8 +37,11 @@
               <option value="all" selected disabled>category</option>
             </select>
 
-            <button type="submit" class="btn btn-primary w-100 my-3">Submit</button>
+            <button type="submit" class="btn btn-primary w-100 my-3">SEARCH</button>
           </form>
+          <div class="card card-res d-none w-100 my-3 p-2 shadow bg-light">
+            <h4 class="text-success" id="res"> </h4>
+          </div>
          </div>
          <div class="col-md-7 p-3 bg-light">
             <div class="wrapper">
@@ -53,12 +56,12 @@
 </main>
 
 
-<footer class="bg-success text-white text-center">
+<!-- <footer class="bg-success text-white text-center">
   <h4> My-Site 2022 &#169</h1>
-</footer>
+</footer> -->
 
 
-<script src="./plugin.js"></script>
+    <script src="./plugin.js"></script>
     <script src="./dbs.js"></script>
     <script src="./main.js"></script>
   </body>

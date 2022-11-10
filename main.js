@@ -1,6 +1,6 @@
 "use strict";
 
-movies.splice(50);
+movies.splice(100);
 
 //-----------------------------NORMALIZE ALL MOVIES ------------//
 
@@ -16,10 +16,9 @@ const allMovies = movies.map((movies) => {
     maxImg: movies.bigThumbnail,
     minImg: movies.smallThumbnail,
     rating: movies.imdbRating,
-    language:movies.language
+    language: movies.language,
   };
 });
-console.log(allMovies);
 
 //-----------------------------NORMALIZE ALL MOVIES ------------//
 
@@ -27,7 +26,10 @@ console.log(allMovies);
 
 function renderAllMovies() {
   allMovies.forEach((el) => {
-    const card =createElement("div", 'card shadow-lg',`
+    const card = createElement(
+      "div",
+      "card shadow-lg",
+      `
     
     <img src="${el.minImg}" class="card-img-top" alt="${el.title}">
     <div class="card-body">
@@ -41,19 +43,98 @@ function renderAllMovies() {
       </ul>
       <div class="social d-flex">
          <button class="btn btn-danger m-2">YouTube</button>
-      <button class="btn btn-primary m-2">BookMark</button>
-      <button class="btn btn-warning m-2">Read More...</button>
+         <button class="btn btn-primary m-2">BookMark</button>
+         <button class="btn btn-warning m-2">Read More...</button>
       </div>
   
     </div>
  
-    `);
-    
-     ;
+    `
+    );
 
-    $('.wrapper').appendChild(card)
+    $(".wrapper").appendChild(card);
   });
-  
 }
-renderAllMovies()
+renderAllMovies();
 
+//============================ FIND MOVIES ======== //
+
+const findFilm = (regexp, rating) => {
+  return allMovies.filter((film) => {
+    return film.title.match(regexp) && film.rating >= rating;
+  });
+};
+
+//=========== FIND FILMS LISTENER ======
+
+$("#submitForm").addEventListener("submit", () => {
+  $(
+    ".wrapper"
+  ).innerHTML = `<div class='d-flex justify-content-center w-100'><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>`;
+
+  const searchValue = $("#filmName").value;
+
+  const filmRating = $("#filmRating").value;
+
+  const regexp = new RegExp(searchValue, "gi");
+
+  const searchResult = findFilm(regexp, filmRating);
+
+  setTimeout(() => {
+    if (searchResult.length > 0) {
+      searchResultsRender(searchResult);
+
+      $(".card-res").classList.remove("d-none");
+
+      $(".card-res").style.displey = "block";
+
+      $(
+        "#res"
+      ).innerHTML = `<strong> ${searchResult.length}</strong> ta ma'lumot topildi`;
+
+      if (searchValue.length === 0) {
+        $(".card-res").classList.add("d-none");
+      }
+    } else {
+      $(".card-res").classList.add("d-none");
+      $(
+        ".wrapper"
+      ).innerHTML = `<h1 class='text-center text-danger'>Ma'lumot topilmadi</h1>`;
+    }
+  }, 2000);
+});
+
+
+function searchResultsRender(data = []) {
+  $(".wrapper").innerHTML = " ";
+
+  data.forEach((el) => {
+    const card = createElement(
+      "div",
+      "card shadow-lg",
+      `
+    
+    <img src="${el.minImg}" class="card-img-top" alt="${el.title}">
+    <div class="card-body">
+      <h4 class="card-title">${el.title}</h4>
+      <ul class="list-unstyled">
+        <li><strong>Year: ${el.year}</strong></li>
+        <li><strong>Language: ${el.language} </strong></li>
+        <li><strong>Runtime: ${el.time}</strong></li>
+        <li><strong>Category: ${el.category}</strong></li>
+        <li><strong>Rating: ${el.rating}</strong></li>
+      </ul>
+      <div class="social d-flex">
+         <button class="btn btn-danger m-2">YouTube</button>
+         <button class="btn btn-primary m-2">BookMark</button>
+         <button class="btn btn-warning m-2">Read More...</button>
+      </div>
+  
+    </div>
+ 
+    `
+    );
+
+    $(".wrapper").appendChild(card);
+  });
+}
