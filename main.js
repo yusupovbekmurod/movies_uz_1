@@ -43,8 +43,8 @@ function renderAllMovies() {
       </ul>
       <div class="social d-flex">
          <a href="${el.link}" target="_blank" class="btn btn-danger m-2">YouTube</a>
-         <button class="btn btn-primary m-2">BookMark</button>
-         <button class="btn btn-warning m-2">Read More...</button>
+         <button class="btn btn-primary m-2" data-read="${el.id}">Read More...</button>
+         <button class="btn btn-warning m-2" data-add="${el.id}">BookMark</button>
       </div>
   
     </div>
@@ -60,15 +60,11 @@ renderAllMovies();
 //============================ FIND MOVIES ======== //
 
 const findFilm = (regexp, rating = 0, category) => {
-
-if (category === 'All') {
-  return allMovies.filter((film) => {
-    return (
-      film.title.match(regexp) &&
-      film.rating >= rating
-    );
-  });
-}
+  if (category === "All") {
+    return allMovies.filter((film) => {
+      return film.title.match(regexp) && film.rating >= rating;
+    });
+  }
 
   return allMovies.filter((film) => {
     return (
@@ -107,7 +103,6 @@ $("#submitForm").addEventListener("submit", () => {
       ).innerHTML = `<strong> ${searchResult.length}</strong> ta ma'lumot topildi`;
 
       if (searchValue.length === 0) {
-       
       }
     } else {
       $(".card-res").classList.add("d-none");
@@ -138,9 +133,9 @@ function searchResultsRender(data = []) {
         <li><strong>Rating: ${el.rating}</strong></li>
       </ul>
       <div class="social d-flex">
-         <button class="btn btn-danger m-2">YouTube</button>
-         <button class="btn btn-primary m-2">BookMark</button>
-         <button class="btn btn-warning m-2">Read More...</button>
+          <a href="${el.link}" target="_blank" class="btn btn-danger m-2">YouTube</a>
+         <button class="btn btn-primary m-2" data-read="${el.id}">Read More...</button>
+         <button class="btn btn-warning m-2" data-add="${el.id}">BookMark</button>
       </div>
   
     </div>
@@ -174,3 +169,87 @@ const dynamicCategory = () => {
 };
 
 dynamicCategory();
+
+// ================ show modal ==========
+
+$(".wrapper").addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-primary")) {
+    const idMovie = e.target.getAttribute("data-read");
+    console.log(idMovie);
+    showModal(idMovie);
+    $(".modal-window").classList.remove("modal-hide");
+  }
+});
+
+function showModal(ID) {
+  const filmItem = allMovies.filter((e) => {
+    return e.id == ID;
+  });
+
+  filmItem.forEach((e) => {
+    const row = createElement(
+      "div",
+      "row",
+      `
+  <div class="col-md-4">
+                    <img src="${e.minImg}" alt="${e.title}" class="img-fluid"/>
+                  </div>
+                  <div class="col-md-6">
+                    <h4 class="text-primary">${e.title}</h4>
+                    <ul class="list-group">
+                      <li class="list-group-item">Rating: ${e.rating}</li>
+                      <li class="list-group-item">Year: ${e.year}</li>
+                      <li class="list-group-item">Runtime: ${e.time}</li>
+                      <li class="list-group-item">Category: ${e.category}</li>
+                      <li class="list-group-item">Language: ${e.language}</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 class="text-danger">
+                    ${e.title}
+                     </h4>
+                     <p class="text-muted">
+                      ${e.summary}
+                     </p>
+                  </div>
+  `
+    );
+    $(".modal-content").appendChild(row);
+  });
+}
+
+$("#close").addEventListener("click", () => {
+  $(".modal-window").classList.add("modal-hide");
+  $(".modal-content").innerHTML = "";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal-window")) {
+    $("#close").classList.toggle("animate");
+  }
+});
+
+// ========= show modal end ==============
+
+// ================ BOOKMARK =============
+
+$(".wrapper").addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-warning")) {
+    const idMovie = e.target.getAttribute("data-add");
+    addBookmark(idMovie);
+  }
+});
+const bookmark = [];
+
+function addBookmark(ID) {
+  const filmItem = allMovies.filter((e) => {
+    return e.id == ID;
+  });
+  if (!bookmark.includes(filmItem[0])) {
+    bookmark.push(filmItem[0]);
+  } else {
+    alert("avval qo'shilgan");
+  }
+
+  localStorage.setItem("bookmark", JSON.stringify(bookmark));
+}

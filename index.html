@@ -5,64 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- bootstrap -->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
     <!-- css -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <title>AllMovies</title>
   </head>
   <body>
-<header class="bg-success">
-   <div class="container">
-      <div class="nav text-white p-3">
-         <h1>AllMovies.UZ</h1>
+    <header class="bg-success">
+      <div class="container">
+        <div class="nav text-white p-3">
+          <h1>AllMovies.UZ</h1>
+        </div>
       </div>
-   </div>
-</header>
+    </header>
 
-<main>
-   <div class="container-fluid ">
-      <div class="row ">
-         <div class="col-md-3  p-3 bg-light">
-          <form action="#" id="submitForm">
-            <label for="filmName" class="my-3 w-100 fs-5">
-              Enter film name 
-              <input type="text" placeholder="Enter film name" class="form-control   p-2 " id="filmName">
-            </label>
-            <label for="filmRating" class="my-3 w-100 fs-5">
-              Enter film rating
-              <input type="number" placeholder="Enter film rating" class="form-control   p-2 " id="filmRating">
-            </label>
-            
-            <select id="category" class="form-select w-100">
-              <option value="all" selected disabled>Select film category</option>
-            </select>
-
-            <button type="submit" class="btn btn-primary w-100 my-3">SEARCH</button>
-          </form>
-          <div class="card card-res d-none w-100 my-3 p-2 shadow bg-light">
-            <h4 class="text-success" id="res"> </h4>
-          </div>
-         </div>
-         <div class="col-md-7 p-3 bg-light">
-            <div class="wrapper">
-
-               
-               
+    <main>
+      <div class="modal-window modal-hide">
+        <div class="modal-container position-relative p-2">
+          <div
+            class="btn btn btn-danger position-absolute end-0 me-2" id="close">X</div>
+          <div class="modal-content container">
+           
             </div>
-         </div>
-         <div class="col p-3 bg-dark">1</div>
-     </div>
-   </div>
-</main>
+          </div>
+        </div>
+      </div>
 
+      <section>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3 p-3 bg-light">
+              <form action="#" id="submitForm">
+                <label for="filmName" class="my-3 w-100 fs-5">
+                  Enter film name
+                  <input
+                    type="text"
+                    placeholder="Enter film name"
+                    class="form-control p-2"
+                    id="filmName"
+                  />
+                </label>
+                <label for="filmRating" class="my-3 w-100 fs-5">
+                  Enter film rating
+                  <input
+                    type="number"
+                    placeholder="Enter film rating"
+                    class="form-control p-2"
+                    id="filmRating"
+                  />
+                </label>
 
-<!-- <footer class="bg-success text-white text-center">
+                <select id="category" class="form-select w-100"></select>
+
+                <button type="submit" class="btn btn-primary w-100 my-3">
+                  SEARCH
+                </button>
+              </form>
+              <div class="card card-res d-none w-100 my-3 p-2 shadow bg-light">
+                <h4 class="text-success" id="res"></h4>
+              </div>
+            </div>
+            <div class="col-md-7 p-3 bg-light">
+              <div class="wrapper"></div>
+            </div>
+            <div class="col p-3 bg-dark">1</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- <footer class="bg-success text-white text-center">
   <h4> My-Site 2022 &#169</h1>
 </footer> -->
 
-
     <script src="./plugin.js"></script>
     <script src="./dbs.js"></script>
-    <script src="./main.js"></script>
+    <script src="./main.js"></script> 
   </body>
 </html>
